@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### VUE-ROUTER 文档地址
+
+https://router.vuejs.org/zh/api/#createwebhistory
