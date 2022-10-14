@@ -1,17 +1,20 @@
 const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: (config) => {
     const plugins = []
     plugins.push(new CompressionPlugin())
+    plugins.push(new BundleAnalyzerPlugin())
     config.plugins = [...config.plugins, ...plugins]
   },
   chainWebpack: (config) => {
     config.optimization.splitChunks({
-      chunks: 'async', // 2. 处理的 chunk 类型
-      minSize: 1, // 4. 允许新拆出 chunk 的最小体积
+      chunks: 'all', // 2. 处理的 chunk 类型
+      minSize: 20000, // 4. 允许新拆出 chunk 的最小体积
       minRemainingSize: 0,
       minChunks: 1, // 5. 拆分前被 chunk 公用的最小次数
       maxAsyncRequests: 30, // 7. 每个异步加载模块最多能被拆分的数量
@@ -24,17 +27,26 @@ module.exports = defineConfig({
           priority: -10, // 1.2 缓存组权重
           reuseExistingChunk: true // 1.3 复用已被拆出的依赖模块，而不是继续包含在该组一起生成
         },
-        common: {
-          name: `chunk-common`,
-          minChunks: 2, // common 组的模块必须至少被 2 个 chunk 共用 (本次分割前)
-          priority: -20,
-          chunks: 'initial', // 只针对同步 chunk
-          reuseExistingChunk: true // 复用已被拆出的依赖模块，而不是继续包含在该组一起生成
+        'vendors-base': {
+          name: 'vendors-base',
+          test: /[\\/]node_modules[\\/](vue|vue-router|axios)/, // 打包vue相关的公用模块
+          chunks: 'all',
+          priority: 10,
+          enforce: true
         },
-        default: {
-          minChunks: 2, // 5. default 组的模块必须至少被 2 个 chunk 共用 (本次分割前)
-          priority: -20,
-          reuseExistingChunk: true
+        'vendors-console': {
+          name: 'vendors-console',
+          test: /[\\/]node_modules[\\/](ant-design-vue|moment)/, // 打三方插件
+          chunks: 'all',
+          priority: 8,
+          enforce: true
+        },
+        'chunk-vendors': {
+          name: 'chunk-vendors',
+          test: /[\\/]node_modules[\\/]/, // 打包剩余
+          chunks: 'all',
+          priority: 1,
+          enforce: true
         }
       }
     })
