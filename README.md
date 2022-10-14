@@ -27,3 +27,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### VUE-ROUTER 文档地址
 
 https://router.vuejs.org/zh/api/#createwebhistory
+
+### webpack优化打包后的文件体积
+
+1. 优化 vendors 文件大小
