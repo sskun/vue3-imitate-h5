@@ -21,7 +21,6 @@ module.exports = defineConfig({
       maxInitialRequests: 30, // 6. 每个入口和它的同步依赖最多能被拆分的数量
       enforceSizeThreshold: 50000, // 8. 强制执行拆分的体积阈值并忽略其他限制
       cacheGroups: {
-        // 1. 缓存组
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/, // 1.1 模块路径/文件名匹配正则
           priority: -10, // 1.2 缓存组权重
