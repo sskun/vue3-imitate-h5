@@ -2,13 +2,26 @@ const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const path = require('path')
+// const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: (config) => {
     const plugins = []
     plugins.push(new CompressionPlugin())
-    plugins.push(new BundleAnalyzerPlugin())
+    plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static'
+      })
+    )
+    // plugins.push(
+    //   new HtmlWebpackPlugin({
+    //     emplate: path.join(__dirname, '/public/index.html'),
+    //     inject: true,
+    //     filename: 'index.ejs'
+    //   })
+    // )
     config.plugins = [...config.plugins, ...plugins]
   },
   chainWebpack: (config) => {

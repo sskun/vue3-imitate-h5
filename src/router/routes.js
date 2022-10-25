@@ -1,15 +1,15 @@
 const routes = [
   {
-    path: '/toutiao',
-    name: 'toutiao',
+    path: '/tthome',
+    name: 'tthome',
     component: () =>
-      import(/* webpackChunkName: "toutiao" */ '@/pages/toutiao/TouHome.vue')
+      import(/* webpackChunkName: "tthome" */ '@/pages/toutiao/TouHome.vue')
   },
   {
     path: '/ttlist',
     name: 'ttlist',
     component: () =>
-      import(/* webpackChunkName: "toutiao" */ '@/pages/toutiao/TouList.vue')
+      import(/* webpackChunkName: "ttlist" */ '@/pages/toutiao/TouList.vue')
   }
 ]
 export default routes

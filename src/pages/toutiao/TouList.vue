@@ -1,11 +1,18 @@
 <template>
-  <div>1111</div>
+  <div>{{name}}</div>
+  <a-radio v-model:checked="checked">Radio</a-radio>
 </template>
-<script >
-// import { ref, reactive, computed,defineProps } from 'vue'
-//   const name: string = '11111'
+<script type='text/ecmascript-6'>
+  console.log(222)
+  export default {
+    name: 'TouHome',
+    data () {
+      return {
+        name: 'TouList'
+      }
+    }
+  }
 </script>
-
 <style lang='scss' scoped='' type='text/css'>
 
 </style>
