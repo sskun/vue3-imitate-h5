@@ -48,14 +48,14 @@ module.exports = defineConfig({
         },
         'vendors-console': {
           name: 'vendors-console',
-          test: /[\\/]node_modules[\\/](ant-design-vue|moment)/, // 打三方插件
+          test: /[\\/]node_modules[\\/](ant-design-vue|moment)/, // 打包指定的大的三方插件
           chunks: 'all',
           priority: 8,
           enforce: true
         },
         'chunk-vendors': {
           name: 'chunk-vendors',
-          test: /[\\/]node_modules[\\/]/, // 打包剩余
+          test: /[\\/]node_modules[\\/]/, // 打包剩余node_modules插件
           chunks: 'all',
           priority: 1,
           enforce: true

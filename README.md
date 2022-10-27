@@ -8,6 +8,8 @@ https://router.vuejs.org/zh/api/#createwebhistory
 
 ## 通过配置 webpack 优化打包体积
 
+webpack 配置地址 https://webpack.docschina.org/plugins/split-chunks-plugin/
+
 > 参考 vue.config.js 的配置，合并到 webpack
 
 1. 优化 vendors 文件大小
